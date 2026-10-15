@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilidades - Hidden Echoes :D</title>
+    <link rel="stylesheet" href="1estihb.css">
+    <style>
+        /* ===== VARIABLES DE COLOR ===== */
+        :root {
+            --rojo: #ff2e4d;
+            --rojo-oscuro: #a10022;
+            --rojo-claro: #ff7b8f;
+            --violeta: #b14aff;
+            --violeta-oscuro: #4b0082;
+            --violeta-claro: #d9a6ff;
+            --negro: #0a0a0f;
+            --negro-suave: #15121c;
+            --texto: #f0e8ff;
+            --blanco: #ffffff;
+            --sombra: rgba(177, 74, 255, 0.35);
+        }
+
+        /* ===== ESTILOS GENERALES ===== */
+        * {
+            box-sizing: border-box;
+            transition: all 0.35s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at 20% 0%, #1a0a2e 0%, var(--negro) 50%, #2a0010 100%);
+            background-attachment: fixed;
+            color: var(--texto);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            animation: fondoAnimado 14s ease infinite alternate;
+        }
+
+        @keyframes fondoAnimado {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--violeta-oscuro) 0%, var(--negro-suave) 50%, var(--rojo-oscuro) 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 6px 30px var(--sombra);
+            border-bottom: 3px solid var(--rojo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(177, 74, 255, 0.3) 0%, transparent 60%);
+            animation: brilloHeader 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes brilloHeader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        header h1 {
+            color: var(--blanco);
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--violeta), 0 0 30px var(--rojo);
+            animation: tituloPulso 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes tituloPulso {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 15px var(--violeta), 0 0 30px var(--rojo); }
+            50% { transform: scale(1.04); text-shadow: 0 0 25px var(--violeta), 0 0 45px var(--rojo); }
+        }
+
+        /* ===== NAV ===== */
+        .barrasuper {
+            background: linear-gradient(90deg, var(--negro-suave), var(--violeta-oscuro), var(--rojo-oscuro));
+            box-shadow: 0 4px 20px var(--sombra);
+            border-bottom: 2px solid var(--violeta);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .barrasuper ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .barrasuper li { margin: 0; }
+
+        .barrasuper a {
+            display: block;
+            color: var(--texto);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .barrasuper a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--rojo);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--rojo);
+        }
+
+        .barrasuper a:hover::after,
+        .barrasuper a.activo::after {
+            width: 80%;
+        }
+
+        .barrasuper a:hover {
+            background: rgba(177, 74, 255, 0.2);
+            color: var(--violeta-claro);
+            text-shadow: 0 0 12px var(--violeta);
+        }
+
+        .barrasuper a.activo {
+            background: rgba(255, 46, 77, 0.2);
+            color: var(--rojo);
+            text-shadow: 0 0 12px var(--rojo);
+        }
+
+        /* ===== MAIN ===== */
+        .main-habilidades {
+            max-width: 1250px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* ===== BLOQUE EXPLICACIÓN ===== */
+        .bloque-explicacion {
+            background: linear-gradient(135deg, rgba(21, 18, 28, 0.95), rgba(75, 0, 130, 0.35));
+            border: 2px solid var(--violeta);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px var(--sombra);
+            animation: aparecer 0.8s ease both;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contex h2 {
+            color: var(--rojo);
+            font-size: 2rem;
+            text-shadow: 0 0 15px var(--rojo), 0 0 30px var(--violeta);
+            border-bottom: 3px solid var(--violeta);
+            padding-bottom: 0.6rem;
+            animation: tituloPulso 3s ease-in-out infinite;
+        }
+
+        .contex p {
+            background: rgba(177, 74, 255, 0.08);
+            padding: 1rem 1.3rem;
+            border-left: 5px solid var(--rojo);
+            border-radius: 12px;
+            margin: 1rem 0;
+            color: var(--texto);
+            line-height: 1.7;
+            transition: all 0.4s ease;
+        }
+
+        .contex p:hover {
+            background: rgba(255, 46, 77, 0.12);
+            transform: translateX(6px);
+            box-shadow: -6px 0 20px var(--sombra);
+        }
+
+        /* ===== TARJETAS DE TIPOS ===== */
+        .contehabi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tarjehab {
+            background: linear-gradient(160deg, rgba(10, 10, 15, 0.9), rgba(75, 0, 130, 0.5));
+            border: 2px solid var(--rojo);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 25px var(--sombra);
+            transition: all 0.45s ease;
+            animation: aparecer 0.6s ease both;
+        }
+
+        .tarjehab:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 45px var(--violeta);
+            border-color: var(--violeta);
+            background: linear-gradient(160deg, rgba(75, 0, 130, 0.4), rgba(255, 46, 77, 0.3));
+        }
+
+        .iconohab {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 12px var(--violeta));
+            animation: iconoFlota 3s ease-in-out infinite;
+        }
+
+        @keyframes iconoFlota {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .tarjehab h3 {
+            color: var(--rojo);
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 12px var(--rojo);
+        }
+
+        .tarjehab p {
+            color: var(--texto);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ===== SOLO FONDO PARA HABILIDADES DE LOS PROTAGONISTAS ===== */
+        .bloque-prota {
+            background: linear-gradient(135deg, rgba(21, 18, 28, 0.95), rgba(75, 0, 130, 0.35)) !important;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px var(--sombra);
+        }
+
+        .info-lateral-poder {
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.95), rgba(75, 0, 130, 0.4)) !important;
+            border-radius: 18px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 30px var(--sombra);
+        }
+
+        /* ===== REGISTRO CLASIFICADO ===== */
+        .bloquegaletecni {
+            max-width: 1250px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.98), rgba(75, 0, 130, 0.35));
+            border: 2px solid var(--rojo);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--sombra);
+            animation: aparecer 0.8s ease both;
+        }
+
+        .bloquegaletecni h2 {
+            color: var(--rojo);
+            text-align: center;
+            font-size: 2.2rem;
+            text-shadow: 0 0 15px var(--rojo), 0 0 30px var(--violeta);
+            border-bottom: 3px solid var(--violeta);
+            padding-bottom: 0.6rem;
+            animation: tituloPulso 3s ease-in-out infinite;
+        }
+
+        .registro {
+            text-align: center;
+            color: var(--violeta-claro);
+            font-style: italic;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== FILTROS ===== */
+        .filhabili {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filbtn {
+            background: linear-gradient(135deg, var(--negro-suave), var(--violeta-oscuro));
+            color: var(--texto);
+            border: 2px solid var(--rojo);
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--sombra);
+            transition: all 0.4s ease;
+        }
+
+        .filbtn:hover {
+            background: linear-gradient(135deg, var(--rojo), var(--rojo-oscuro));
+            color: var(--blanco);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 25px var(--rojo), 0 0 40px var(--violeta);
+            border-color: var(--violeta);
+        }
+
+        /* ===== GRID DE TARJETAS TÉCNICAS ===== */
+        .cuadricuatro {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .tarjetec {
+            background: linear-gradient(160deg, rgba(10, 10, 15, 0.95), rgba(75, 0, 130, 0.4));
+            border: 2px solid var(--violeta-oscuro);
+            border-radius: 14px;
+            padding: 1.2rem;
+            box-shadow: 0 6px 20px var(--sombra);
+            transition: all 0.45s ease;
+            animation: aparecer 0.6s ease both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tarjetec::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 46, 77, 0.15), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .tarjetec:hover::before {
+            left: 100%;
+        }
+
+        .tarjetec:hover {
+            transform: translateY(-8px) scale(1.03);
+            border-color: var(--rojo);
+            box-shadow: 0 15px 40px var(--rojo-oscuro), 0 0 30px var(--violeta);
+        }
+
+        .tarjetec h4 {
+            color: var(--rojo);
+            font-size: 1.2rem;
+            margin: 0.6rem 0;
+            text-shadow: 0 0 10px var(--rojo);
+            letter-spacing: 0.5px;
+        }
+
+        .tarjetec p {
+            color: var(--texto);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+
+        .usua {
+            color: var(--violeta-claro);
+            font-style: italic;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px var(--violeta);
+            margin-top: 0.8rem;
+            animation: parpadeo 2s ease-in-out infinite;
+        }
+
+        @keyframes parpadeo {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ===== FORMULARIO ===== */
+        .form-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, rgba(21, 18, 28, 0.98), rgba(75, 0, 130, 0.4));
+            border: 2px solid var(--rojo);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px var(--sombra);
+            animation: aparecer 0.8s ease both;
+        }
+
+        .form-container h2 {
+            color: var(--violeta);
+            text-align: center;
+            font-size: 1.8rem;
+            text-shadow: 0 0 15px var(--violeta), 0 0 30px var(--rojo);
+            border-bottom: 3px solid var(--rojo);
+            padding-bottom: 0.6rem;
+            margin-top: 0;
+            animation: tituloPulso 3s ease-in-out infinite;
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--rojo);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid var(--violeta-oscuro);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: rgba(10, 10, 15, 0.85);
+            color: var(--texto);
+            transition: all 0.35s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(240, 232, 255, 0.4);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--rojo);
+            box-shadow: 0 0 20px var(--rojo), 0 0 35px var(--violeta-oscuro);
+            background: rgba(10, 10, 15, 0.95);
+            transform: translateY(-2px);
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--violeta), var(--violeta-oscuro), var(--rojo-oscuro));
+            color: var(--blanco);
+            border: 2px solid var(--rojo);
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            box-shadow: 0 6px 25px var(--sombra);
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: linear-gradient(135deg, var(--rojo), var(--violeta));
+            box-shadow: 0 0 30px var(--rojo), 0 0 50px var(--violeta);
+            text-shadow: 0 0 12px var(--blanco);
+        }
+
+        .error-msg {
+            color: var(--rojo-claro);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: block;
+            font-weight: 600;
+            text-shadow: 0 0 8px var(--rojo);
+        }
+
+        .oculto { display: none; }
+
+        #mensaje-confirmacion {
+            background: linear-gradient(135deg, var(--rojo), var(--violeta));
+            color: var(--blanco);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border: 2px solid var(--violeta-claro);
+            box-shadow: 0 0 25px var(--rojo);
+            animation: aparecer 0.6s ease both;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.7rem; letter-spacing: 1px; }
+            .barrasuper a { padding: 0.8rem 1rem; font-size: 0.85rem; }
+            .contex h2 { font-size: 1.5rem; }
+            .bloquegaletecni h2, .form-container h2 { font-size: 1.5rem; }
+            .cuadricuatro { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Habilidades y Poderes</h1>
+    </header>
+
+    <nav class="barrasuper">
+        <ul>
+            <li><a href="index.html">Premisa</a></li>
+            <li><a href="personajesc.html">Personajes</a></li>
+            <li><a href="habilidadesb.html" class="activo">Habilidades</a></li>
+            <li><a href="lugares.html">Lugares</a></li>
+            <li><a href="contactob.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <main class="main-habilidades">
+        <div class="bloque-explicacion">
+            <div class="contex">
+                <h2>Habilidades</h2>
+                <p>Hasta hace un par de siglos, nadie sabía de dónde venían, hasta que ciertos hallazgos revelaron que probablemente venían desde antes de la humanidad misma, pero no supieron sacarle provecho. En el pasado, si nacías fuerte, ganabas estatus; si nacías débil, eras esclavo. No fue hasta que las grandes mentes de los siglos XIX y XX descubrieron lo que una “habilidad entrenada” podría lograr y la humanidad se encaminó a un nuevo amanecer.</p>
+                <p>Divididas en: Emisión, mutación y transformación. Cada habilidad dotó a su portador de capacidades mejoradas que escapaban del concepto limitado del humano, creando un nuevo “estándar” y un nuevo amanecer para la humanidad.</p>
+                <p>Mas hubo un misterio que jamás se resolvió… ¿De dónde provienen semejantes “milagros”? Esa es una pregunta para la que nadie pudo encontrar respuesta… ¿O tal vez sí?.</p>
+            </div>
+            
+            <div class="contehabi">
+                <div class="tarjehab">
+                    <span class="iconohab">💥</span>
+                    <h3>Emisión</h3>
+                    <p>Capacidad del usuario de generar, liberar o controlar sustancias, energía o alterar la materia y el entorno a su alrededor.</p>
+                </div>
+
+                <div class="tarjehab">
+                    <span class="iconohab">🧬</span>
+                    <h3>Mutación</h3>
+                    <p>Alteración celular o fisica neonatal que otorga rasgos físicos alterados y/o mejorados permanentemente.</p>
+                </div>
+
+                <div class="tarjehab">
+                    <span class="iconohab">⚡</span>
+                    <h3>Transformación</h3>
+                    <p>Modificación estructural completa y/o parcial del cuerpo para alterar propiedades o estado de forma temporal.</p>
+                </div>
+            </div>
+        </div>  
+        <div class="bloque-prota" id="panel-interactivo">
+            <h2 id="titulo-dinamico">Habilidades de los Protagonistas</h2>      
+            <div class="interfaz-poderes">
+                <div class="contehab-cinco" id="contenedor-botones">
+                    <div class="tarjeprota" data-titulo="Maestria Sombria" data-desc="El portador controla completamente la energía oscura, conocida como 'sombras', que emana de su cuerpo. Esta energía puede ser moldeada de diversas maneras: lanzada como proyectiles, utilizada para crear objetos o extremidades adicionales, o imbuida en herramientas y armas. Su forma más común es la manifestación de tentáculos, generalmente dos, que surgen de la espalda, aunque la cantidad y ubicación de estos pueden variar según la necesidad, los cuales le otorgan mayor agilidad. El usuario también puede integrarse con cualquier sombra del entorno, ocultándose a sí mismo y a otros aliados si es necesario. De forma pasiva, el portador puede ver mejor en la oscuridad, distinguiendo contornos, y posee una regeneración lenta, capaz de curar cortes menores en unas tres horas" data-img="imghb/maestria.jpg">
+                        <img src="imghb/maestria.jpg" alt="Maestria Sombria" class="img-poder">
+                        <div class="tooltip-resumen">
+                            <h4>Maestria Sombria</h4>
+                            <span class="badgetipo" id="#">Emisión</span>
+                            <p> Control de energía oscura, llamada "sombras". Puede lanzarse como proyectil, crear objetos o extremidades adicionales.</p>
+                        </div>
+                    </div>                
+                    <div class="tarjeprota" data-titulo="Sound Waves" data-desc="El portador puede captar los sonidos emitidos en un radio determinado, pudiendo redirigirlas en ondas de sonido. Puede amplificarlas y dirigirlas a objetivos con una fuerza destructiva igual a la de un camión de carga o atenuarlas hasta una fuerza inofensiva con la cual puede elevarse unos metros en el aire o crear un escaneo en un área a modo de ecolocalización." data-img="imghb/sound.jpg">
+                        <img src="imghb/sound.jpg" alt="Sound Waves" class="img-poder">
+                        <div class="tooltip-resumen">
+                            <h4>Sound Waves</h4>
+                            <p> Permite lanzar ondas sonoras usando el ruido que el portador genera o que capta del entorno, puede amplificarlas para causar destrucción o atenuarlas para escanear el entorno como una ecolocalización.</p>
+                            <span class="badgetipo" id="#">Emisión</span>
+                        </div>
+                    </div>                
+                    <div class="tarjeprota" data-titulo="Distorsion" data-desc="Permite al portador alterar temporalmente el estado físico de su cuerpo, provocando una distorsión visual similar a un glitch. Durante la activación, puede desplazarse a gran velocidad siguiendo trayectorias libres y cambiando de dirección de forma impredecible, recorriendo físicamente la distancia en lugar de teletransportarse.
+                            Mientras la habilidad permanece activa, el usuario entra en un estado de desfase parcial respecto al plano físico, permitiendo que la materia y los ataques lo atraviesen sin causarle daño. Este efecto también puede extenderse a objetos o personas en contacto con el portador, reduciendo el alcance según la masa transportada." data-img="imghb/distorsion.jpg">
+                        <img src="imghb/distorsion.jpg" alt="Distorsion" class="img-poder">
+                        <div class="tooltip-resumen">
+                            <h4>Distorsion</h4>
+                            <span class="badgetipo" id="#">Transformación</span>
+                            <p>Permite alterar temporalmente el cuerpo del portador, permitiendo desplazarse a gran velocidad en saltos casi instantaneos y rompiendo el estándar físico normal.</p>
+                        </div>
+                    </div>
+                    <div class="tarjeprota" data-titulo="Cryokinesis" data-desc="Control de la condensación del ambiente, pudiendo reducir drasticamente su temperatura y formar cristales de hielo. Puede unificarlos formando pequeñas ventiscas y congelar fuentes liquidas. No obstante debido a su reciente despertar aun posee un potencial latente esperando manisfestar." data-img="imghb/cryo.jpg">
+                        <img src="imghb/cryo.jpg" alt="Cryokinesis" class="img-poder">
+                        <div class="tooltip-resumen">
+                            <h4>Cryokinesis</h4>
+                            <p>Control elemental del hielo. Reune la condensación del ambiente, reduciendo drásticamente la temperatura para redirigir y controlar la energía helada según su voluntad.</p>
+                            <span class="badgetipo" id="#">Emisión</span>
+                        </div>
+                    </div>               
+                    <div class="tarjeprota" data-titulo="Pyrokinesis" data-desc="Control elementeal de energia calorifica, lo que le permite manipular la temperatura y por ende el fuego. Puede controlar, darle forma, imbuir objetos o encender su propio cuerpo en llamas ,ademas posee un factor curativo decente. Sin embargo, todavia hay limites que esperan romperse..." data-img="imghb/pyro.jpg">
+                        <img src="imghb/pyro.jpg" alt="Pyrokinesis" class="img-poder">
+                        <div class="tooltip-resumen">
+                            <h4>Pyrokinesis</h4>
+                            <p>Control elemental del elemento fuego. Puede emitirlo, lanzarlo, darle forma o incluso imbuir objetos con energía calorífica.</p>
+                            <span class="badgetipo" id="#">Emisión</span>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+                <div class="info-lateral-poder" id="cuadro-texto">
+                    <div class="contenedor-detalle-activo">
+                        <img src="" alt="Poder Seleccionado" id="detalle-img-dinamica" class="img-grande-activa">
+                        <div class="detalle-texto">
+                            <h3 id="texto-titulo"></h3>
+                            <p id="texto-desc"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+        <div class="bloquegaletecni">
+            <h2>Regristo Clasificado</h2>
+            <p class="registro">ARCHIVO DE HABILIDADES · FILTRO DE CLASIFICACIÓN</p>
+            <div class="filhabili" id="filhabili">
+                <button type="button" class="filbtn" data-fil="emision">
+                Emisión
+                </button>
+                <button type="button" class="filbtn" data-fil="mutacion">
+                Mutación
+                </button>
+                <button type="button" class="filbtn" data-fil="transformacion">
+                Transformación
+                </button>
+            </div>
+            <div class="cuadricuatro">
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Acumulacion</h4>
+                    <p>Acumula energía cinética mediante el movimiento o los impactos recibidos para liberarla posteriormente, aumentando considerablemente la fuerza de sus golpes o impulsos..</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Atomic</h4>
+                    <p>Permite controlar la energía nuclear y manipularla para producir efectos energéticos de gran intensidad. Su potencial destructivo puede ser considerable dependiendo de cómo se utilice.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Black Dial</h4>
+                    <p>Permite crear estructuras similares agujeros negros capaces de atraer y absorber materia a su alrededor. Su peligrosidad depende del tamaño y de las propiedades de los agujeros generados.</p>
+                    <P class="usua">/ERROR/</P>
+                    </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Bristly hair</h4>
+                    <p>Permite endurecer y volver puntiagudo el cabello, transformándolo en una estructura similar a las púas de un erizo. Puede utilizarlo como medio de defensa o para atacar a corta distancia..</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Calcinacion</h4>
+                    <p>Es una versión más limitada de la Pyroquinesis que permite emitir fuego, pero no controlarlo de manera completa. Su uso se centra principalmente en generar y proyectar llamas.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Transformación</span>
+                    <h4>Cartoon</h4>
+                    <p>Permite alargar las extremidades del portador más allá de sus proporciones normales. Esto le proporciona mayor alcance al atacar, sujetar objetos o interactuar con elementos distantes.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Compresion</h4>
+                    <p>Permite aumentar la presión sobre una zona determinada para comprimir y aplastar objetos. La eficacia depende de la presión ejercida y de la resistencia del objetivo.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Control del Entorno</h4>
+                    <p>Permite percibir la presencia de seres vivos dentro de un área determinada mediante una especie de red sensorial. Funciona como un radar biológico que ayuda al portador a detectar lo que ocurre a su alrededor.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Transformación</span>
+                    <h4>Cristalizacion Celular</h4>
+                    <p>Permite cristalizar las propias células para crear estructuras extremadamente resistentes, flexibles y capaces de absorber impactos. El cristal puede almacenar y liberar energía cinética, mientras que su formación permite una regeneración limitada.</p>
+                    <P class="usua clasi">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo">Transformación</span>
+                    <h4>Cuerpo Tactico</h4>
+                    <p>Permite modificar el propio cuerpo para crear armas blancas o armas de fuego a partir de sus estructuras corporales. Esto le brinda distintas opciones ofensivas sin necesidad de llevar armamento externo.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo">Transformación</span>
+                    <h4>Demon Rage</h4>
+                    <p>Aumenta la fuerza física del portador de manera exponencial conforme se incrementa su ira. Cuanto más enfadado se encuentra, mayor es el poder que puede alcanzar, aunque mantener el control podría convertirse en un desafío.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo">Emisión</span>
+                    <h4>Devorador</h4>
+                    <p>Permite absorber ingentes cantidades de casi cualquier tipo de energía, a excepcion de la psíquica, y proyectarla en una amplitud de maneras según las necesidades del portador.</p>
+                    <P class="usua clasi">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo">Emisión</span>
+                    <h4>Dogma</h4>
+                    <p>Permite ejercer una forma de hipnosis mediante el discurso del portador. Las personas que escuchan sus palabras y creen en lo que dice quedan sometidas a su voluntad, convirtiendo la persuasión en un mecanismo de control.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo">Emisión</span>
+                    <h4>Electrogénesis</h4>
+                    <p>Permite generar y controlar electricidad, utilizándola para producir descargas eléctricas o canalizar energía hacia determinados objetivos. Puede servir tanto para atacar como para interactuar con dispositivos eléctricos, según sus límites.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Enchanced Healing</h4>
+                    <p>Otorga una capacidad curativa que permite acelerar la recuperación de heridas y daños físicos. Su eficacia está sujeta a los límites propios de la habilidad, por lo que no necesariamente puede sanar cualquier lesión de forma instantánea.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Exanguinación</h4>
+                    <p>Permite manipular la propia sangre y solidificarla al separarse del cuerpo para crear estructuras simples, reforzar objetos o atacar y defenderse. Puede recuperarla o absorber sangre externa para reponer sus reservas, pero su uso excesivo deteriora su estabilidad mental y aumenta su agresividad.</p>
+                    <P class="usua clasi">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Ferohipnosis</h4>
+                    <p>Permite liberar feromonas capaces de hipnotizar a quienes las inhalan, independientemente de su sexo. Las personas afectadas quedan bajo su influencia, lo que convierte la dispersión de estas sustancias en su principal mecanismo de acción.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión,Mutación,Transformación</span>
+                    <h4>Flujo Luminico</h4>
+                    <p>Permite desplazarse continuamente a gran velocidad mediante un flujo de energía generado por un núcleo que sustituye al corazón. Mientras está activo, el cuerpo entra en un estado de desfase que permite atravesar objetos sólidos y ataques físicos, aunque requiere concentración y estabilidad energética.</p>
+                    <P class="usua clasi">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Flourescencia</h4>
+                    <p>Permite generar y emitir energía lumínica, produciendo luz que puede utilizarse para iluminar espacios o afectar visualmente a los objetivos. A diferencia de otras variantes, su capacidad se limita a la emisión de esta energía.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Fuerza Telúrica</h4>
+                    <p>Emite vibraciones capaces de sacudir la masa terrestre dentro de un rango moderado. La intensidad de estas vibraciones aumenta cuanto más cerca se encuentre el objetivo del portador, permitiendo afectar el terreno y a quienes estén sobre él.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Healing Smoke</h4>
+                    <p>Permite generar nubes de humo con propiedades curativas que ayudan a sanar a quienes entran en contacto con ellas. La nube funciona como un medio de recuperación que puede alcanzar a varios objetivos dentro de su área de efecto.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Hemo-Natura</h4>
+                    <p>Permite acelerar el crecimiento y controlar la vegetación utilizando sangre como catalizador. La sangre contiene esporas vegetales, el portador puede estimular el desarrollo de las plantas y favorecer su expansión a partir del contacto de su sangre con materia vegetal.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Herbogénesis</h4>
+                    <p>Otorga control sobre las plantas, permitiendo manipularlas y dirigir su comportamiento. A diferencia de Natura, esta variante no se limita únicamente a emitir o controlar su crecimiento de forma básica.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Hiperrayo</h4>
+                    <p>Permite disparar un potente rayo de energía contra un objetivo, concentrando una gran cantidad de poder en un solo ataque. Sin embargo, necesita un tiempo de espera prolongado entre disparos, lo que limita la frecuencia con la que puede utilizarse.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Hunting</h4>
+                    <p>Permite fijar un objetivo y conocer su ubicación de manera constante, incluso cuando se encuentra fuera del campo visual del portador. Una vez establecido el seguimiento, resulta muy difícil perder de vista al objetivo.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Hydrokinesis</h4>
+                    <p>Permite controlar y manipular el agua para dirigir su movimiento y utilizarla de distintas maneras. Esta variante se limita a la emisión, por lo que no incluye todas las posibilidades de una versión completa de la habilidad.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">emisión</span>
+                    <h4>Iusión Luminosa</h4>
+                    <p>Permite emitir un destello intenso de luz capaz de deslumbrar temporalmente a quienes lo miran. Puede utilizarse para distraer, dificultar la visión del oponente o crear una oportunidad para escapar o atacar.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Impulsión</h4>
+                    <p>Permite impulsarse al apoyarse contra superficies sólidas, utilizando el contacto como punto de rebote, de forma similar al funcionamiento de una resortera. Necesita disponer de puntos de apoyo para cambiar de dirección o desplazarse con fuerza.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Mutación</span>
+                    <h4>Injertos</h4>
+                    <p>Otorga compatibilidad absoluta con trasplantes de órganos, tejidos y sangre en cualquier parte del cuerpo. También permite que otras personas reciban trasplantes compatibles y viables gracias a la intervención de esta habilidad.</p>
+                    <P class="usua clasi">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Transformación</span>
+                    <h4>Light Speed</h4>
+                    <p>Es una habilidad de tipo velocista que permite al portador desplazarse a gran velocidad. Su principal ventaja consiste en la movilidad, facilitando los ataques rápidos, las evasiones y los desplazamientos en poco tiempo.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Natura</h4>
+                    <p>Permite controlar las plantas y manipular su comportamiento para utilizarlas de diferentes maneras. A diferencia de Herbogénesis, esta variante está limitada a la emisión y no posee el alcance completo de aquella.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Neurotoxic Mist</h4>
+                    <p>Permite generar una niebla con propiedades neurotóxicas que suprime temporalmente el funcionamiento del sistema nervioso de quienes quedan expuestos. Puede dificultar las respuestas físicas de los afectados mientras dure su efecto.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Mutación,Emisión</span>
+                    <h4>Nucleo</h4>
+                    <p>Posee un núcleo energético que sustituye al corazón y permite proyectar energía capaz de degradar materia inorgánica. También puede concentrarla en sus músculos para potenciar saltos, aceleraciones y cambios de dirección, aunque la acumulación excesiva de energía puede provocar una sobrecarga.</p>
+                    <P class="usua clasi">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Transformación</span>
+                    <h4>Obsidian</h4>
+                    <p>Permite controlar el fuego mediante una variante centrada en la creación de llamas. El portador puede generar fuego para utilizarlo de forma ofensiva, aunque sus posibilidades son diferentes de las que ofrece la Pyroquinesis completa.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Mutación</span>
+                    <h4>Polimosfirmo Articular</h4>
+                    <p>Otorga un par adicional de brazos, aumentando las capacidades físicas y permitiendo realizar varias acciones simultáneamente, así como mejorar el alcance y la versatilidad en combate.</p>
+                    <P class="usua clasi">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Pyrokinesis</h4>
+                    <p>Permite controlar el fuego en su variante completa, ofreciendo mayores posibilidades de manipulación que Calcinación. Puede emplearse para generar, dirigir y controlar las llamas según las capacidades del portador.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Radar Fantasmal</h4>
+                    <p>Funciona como un radar biológico que permite detectar a otras personas y proyectar sus posiciones con respecto a la ubicación del portador. Esto facilita la orientación y el seguimiento de múltiples individuos sin depender exclusivamente de la vista.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Realistic Dreams</h4>
+                    <p>Permite inducir ilusiones de tipo hipnótico que hacen que los objetivos perciban situaciones o imágenes que no son reales. A diferencia de Dogma, no busca someter directamente la voluntad de las personas, sino alterar lo que experimentan o perciben.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Red Sensorial</h4>
+                    <p>Permite detectar la presencia de seres vivos mediante una red sensorial que funciona como un radar biológico. Ayuda al portador a reconocer la ubicación de otros individuos dentro del alcance de la habilidad.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Silver Thread</h4>
+                    <p>Permite generar hilos extremadamente resistentes, comparables en dureza al acero. Estos pueden utilizarse para inmovilizar o enredar objetivos, sujetar objetos y balancearse entre distintos puntos para desplazarse.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Mutación</span>
+                    <h4>Simbionte</h4>
+                    <p>Permite unirse a un portador externo y establecer una relación simbiótica que incrementa enormemente sus capacidades físicas. El individuo que recibe la unión obtiene una mejora considerable de su rendimiento corporal gracias al vínculo.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Transformación</span>
+                    <h4>Speed Fire</h4>
+                    <p>Es una habilidad de tipo velocista en la que la fricción generada por el desplazamiento produce fuego. Combina una gran velocidad de movimiento con la generación de llamas, convirtiendo las carreras y los desplazamientos rápidos en una posible fuente de daño.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Star Power</h4>
+                    <p>Permite lanzar proyectiles de energía con forma de estrellas, cuya potencia puede variar según la intensidad aplicada. Esta característica ofrece flexibilidad para realizar ataques de diferente fuerza dependiendo de la situación.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Telekinesis</h4>
+                    <p>Permite mover, levantar y desplazar objetos utilizando únicamente la mente, sin necesidad de contacto físico. Su utilidad depende de la fuerza telequinética del portador y de los límites de peso, distancia o control que tenga la habilidad.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emisión</span>
+                    <h4>Vendaval</h4>
+                    <p>Permite controlar y emitir corrientes de aire para generar ráfagas que pueden empujar, desestabilizar o afectar a los objetivos. Su aplicación depende de la intensidad y dirección del viento producido.</p>
+                    <P class="usua">/ERROR/</P>
+                </div>
+                <div class="tarjetec">
+                    <span class="badgetipo" id="#">Emision</span>
+                    <h4>Viento Cortante</h4>
+                    <p> Permite crear corrientes de aire concentradas y afiladas capaces de cortar al impactar contra una superficie u objetivo. A diferencia de Vendaval, que se centra en el control del aire, esta variante utiliza el viento principalmente como medio de ataque cortante.</p>
+                    <P class="usua">//ERROR//</P>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="form-container">
+        <h2>Enviar comentario</h2>
+        <div id="mensaje-confirmacion" class="oculto"></div>
+        <form id="formulario-registro" action="#" method="POST" novalidate>
+            <div class="form-group">
+                <label for="nombre">Nombre/Nickname:</label>
+                <input type="text" id="nombre" name="nombre" required minlength="3" placeholder="Inserte Nickname chevere">
+                <span class="error-msg" id="error-nombre"></span>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required placeholder="correo@example.com">
+                <span class="error-msg" id="error-correo"></span>
+            </div>    
+            <div class="form-group">
+                <label for="comentario">Comentarios (Mínimo 10 caracteres):</label>
+                <input type="text" id="comentario" name="comentario" required minlength="6">
+                <span class="error-msg" id="error-comentario"></span>
+            </div>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+    <script src="1pagina.js"></script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+}
+
+.barrasuper {
+    background-color: #2c3e50;
+}
+
+.barrasuper ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.barrasuper a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.barrasuper a:hover {
+    background-color: #34495e;
+    color: #1abc9c;
+}
+
+.barrasuper a.activo {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.conteprinci {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px; 
+    gap: 3rem;
+    align-items: start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 4rem auto 2rem auto;
+    padding: 0 2rem;
+    justify-content: center;
+}
+
+.bloquelugar {
+    min-width: 0;
+}
+
+.contemapa {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.contemapa h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.imgmapa {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.escenario {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.rejiluga {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.tarjeluga {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.contenedorlugar {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+}
+
+.fotolugar {
+    width: 100%;
+    height: auto;
+    max-height: 450px; 
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color: transparent;
+}
+
+.fotolugar:hover {
+    box-shadow: 0 6px 15px rgba(26, 188, 156, 0.2);
+}
+
+.imgfoto {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.fotolugar:hover .imgfoto {
+    transform: scale(1.02);
+}
+
+.infoluga {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(15px);
+    transition: max-height 0.5s ease, opacity 0.4s ease, transform 0.5s ease;
+}
+
+.infoluga h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.infoluga p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.infoluga p:last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 901px) {
+
+    .contenedorlugar.foto-encogida {
+        flex-direction: row;
+        align-items: start;
+    }
+    .contenedorlugar.foto-encogida .fotolugar {
+        width: 40%; 
+        height: auto; 
+    }
+    .contenedorlugar.foto-encogida .infoluga {
+        width: 60%;
+    }
+}
+
+.instaconte {
+    width: 100%;
+    margin-top: 3.5rem;
+}
+
+.tituinsta {
+    color: #2c3e50;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    padding-left: 0.5rem;
+}
+
+.mosaiinsta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem; 
+    width: 100%;
+}
+
+.filainsta {
+    display: flex;
+    gap: 1.5rem; 
+    width: 100%;
+}
+
+.fila-tres, .fila-dos {
+    justify-content: center;
+}
+
+.filainsta .cuadroinsta {
+    width: calc((100% - (1.5rem * 2)) / 3); 
+    height: 220px; 
+    overflow: hidden; 
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.filainsta .cuadroinsta:hover {
+    transform: translateY(-5px);
+}
+
+.cuadroinsta img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px; 
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.06));
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.filainsta .cuadroinsta:hover img {
+    filter: drop-shadow(0px 6px 15px rgba(26, 188, 156, 0.3));
+}
+
+
+.cuadroinsta img {
+    display: block;
+    width: auto;      
+    height: auto;    
+    max-width: 100%;  
+    max-height: 100%; 
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.06));
+    transition: filter 0.3s ease;
+}
+
+.filainsta .cuadroinsta:hover img {
+    filter: drop-shadow(0px 6px 12px rgba(26, 188, 156, 0.3));
+}   
+
+.contenedorlugar.foto-encogida .infoluga {
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contenedorlugar.foto-encogida .avisoexplor {
+    opacity: 0;
+}
+
+.form-container {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    align-self: start; 
+    text-align: left;
+    width: 100%;
+}
+
+.form-container h2 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 0.8rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container textarea {
+    width: 100% !important;
+    padding: 0.5rem 0.8rem !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    font-size: 0.9rem !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    outline: none !important;
+    background-color: #ffffff !important;
+    box-sizing: border-box !important; 
+    transition: border-color 0.2s ease, background-color 0.2s ease !important;
+}
+
+.form-container textarea {
+    resize: vertical !important;
+    min-height: 100px !important;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="email"]:focus,
+.form-container textarea:focus {
+    border-color: #1abc9c !important;
+    background-color: #fcfcfc !important;
+}
+
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 0.2rem;
+}
+
+.form-container button[type="submit"] {
+    width: 100%;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s ease;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #1abc9c;
+}
+
+.oculto {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .conteprinci {
+        grid-template-columns: 1fr; 
+        margin: 2rem auto;
+        padding: 0 1rem;
+        gap: 2rem;
+    }
+
+    .escenario {
+        padding: 1rem;
+    }
+
+    .fotolugar {
+        height: 250px;
+    }
+
+    .barrasuper ul {
+        flex-wrap: wrap;
+    }
+
+    .barrasuper a {
+        padding: 0.8rem 1rem;
+    }
+
+    .form-container {
+        margin: 0;
+    }
+    .filainsta {
+        flex-wrap: wrap; 
+        gap: 1rem;
+    }
+    
+    .filainsta .cuadroinsta {
+        width: calc((100% - 1rem) / 2);
+        height: 180px;
+    }
+}

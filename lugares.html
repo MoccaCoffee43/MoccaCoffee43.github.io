@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lugares - Hidden Echoes</title>
+    <link rel="stylesheet" href="1estilg.css">
+</head>
+<body>
+
+    <header>
+        <h1>Hidden Echoes</h1>
+    </header>
+
+    <nav class="barrasuper">
+        <ul>
+            <li><a href="index.html">Premisa</a></li>
+            <li><a href="personajesc.html">Personajes</a></li>
+            <li><a href="habilidadesb.html">Habilidades</a></li>
+            <li><a href="lugares.html" class="activo">Lugares</a></li>
+            <li><a href="contactob.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <main class="conteprinci">
+        <section class="bloquelugar">
+            <div class="contemapa">
+                <h2>Archipiélago Jraldrick</h2>
+                <img src="imglg/jraldrick.jpg" alt="Mapa del universo de Hidden Echoes" class="imgmapa">
+            </div>
+        </section>
+        <div class="form-container">
+            <h2>Enviar comentario</h2>
+            <div id="mensaje-confirmacion" class="oculto"></div>
+            <form id="formulario-registro" action="#" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" required minlength="3" placeholder="Apellido y Nombres">
+                    <span class="error-msg" id="error-nombre"></span>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" required placeholder="correo@example.com">
+                    <span class="error-msg" id="error-correo"></span>
+                </div>    
+                <div class="form-group">
+                    <label for="comentario">Comentarios (Mínimo 10 caracteres):</label>
+                    <textarea id="comentario" name="comentario" required minlength="10" rows="4" placeholder="Escribe aquí tu opinión..."></textarea>
+                    <span class="error-msg" id="error-comentario"></span>
+                </div>
+                
+                <button type="submit">Enviar Comentario</button>
+            </form>
+        </div>
+    </main>
+    <section class="escenario">
+        <div class="rejiluga">
+            <article class="tarjeluga">
+                <div class="contenedorlugar">
+                    <div class="fotolugar" id="fotoklein" title="Haz clic para ver la historia de la academia">
+                        <img src="imglg/klein.jpg" alt="Instalaciones de la Academia Klein" class="imgfoto">
+                    </div>
+                    <div class="infoluga" id="texto-klein">
+                        <h2>Academia Klein</h2>
+                        <p>Fundada en el (2150/2202) por Arthur Kleim, empezó como una escuela pequeña con el objetivo de guiar a las promesas locales en el desarrollo de sus habilidades, pero conforme pasaba el tiempo, logró captar la atención debido a los logros de sus egresados y posteriormente pasó a estar en los ojos del mundo.</p>
+                        <p>Aun habiendo pasado cerca de 30 años desde el fallecimiento de Arthur Kleim y 50 años de su creación, el objetivo de la escuela no ha cambiado; todo lo contrario. Enfocó sus esfuerzos en recibir y apoyar a los jóvenes del mundo, ofreciendo becas académicas en base al talento de los postulantes.</p>
+                        <p>Tras tantos años, la escuela cuenta con instalaciones de vanguardia, un excepcional sistema de seguridad y una plana docente altamente capacitada para lidiar con los estudiantes y sus variadas habilidades.</p>
+                    </div>
+
+                </div>
+            </article>
+            <div class="instaconte">
+                <h3 class="tituinsta">Instalaciones de la Academia</h3>
+                <div class="mosaiinsta">
+                    <div class="filainsta fila-tres">
+                    <div class="cuadroinsta"><img src="imglg/torre1.jpg" alt="Torre 1"></div>
+                    <div class="cuadroinsta"><img src="imglg/torre2.jpg" alt="Torre 2"></div>
+                    <div class="cuadroinsta"><img src="imglg/torre3.jpg" alt="Torre 3"></div>
+                </div>
+                <div class="filainsta fila-tres">
+                    <div class="cuadroinsta"><img src="imglg/pista.jpg" alt="Pista de atletismo"></div>
+                    <div class="cuadroinsta"><img src="imglg/canchas.jpg" alt="Canchas deportivas"></div>
+                    <div class="cuadroinsta"><img src="imglg/gimnasioin.jpg" alt="Gimnasio interno"></div>
+                </div>
+                <div class="filainsta fila-dos">
+                    <div class="cuadroinsta"><img src="imglg/domo1.jpg" alt="Domo 1"></div>
+                    <div class="cuadroinsta"><img src="imglg/domo2.jpg" alt="Domo 2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="1pagina.js"></script>
+</body>
+</html>
+

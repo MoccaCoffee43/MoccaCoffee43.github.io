@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personajes - Hidden Echoes</title>
+    <link rel="stylesheet" href="1estipj.css">
+    <style>
+        /* ===== VARIABLES DE COLOR ===== */
+        :root {
+            --naranja: #ff8c42;
+            --naranja-oscuro: #e85d04;
+            --naranja-claro: #ffd7b5;
+            --azul-marino: #1b2a4e;
+            --azul-marino-oscuro: #0d1830;
+            --azul-marino-claro: #34495e;
+            --texto: #1b2a4e;
+            --blanco: #ffffff;
+            --sombra: rgba(27, 42, 78, 0.35);
+        }
+
+        /* ===== ESTILOS GENERALES ===== */
+        * {
+            box-sizing: border-box;
+            transition: all 0.35s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--naranja-claro) 0%, #e8eef7 50%, var(--naranja) 100%);
+            background-attachment: fixed;
+            background-size: 200% 200%;
+            color: var(--texto);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            animation: fondoAnimado 12s ease infinite alternate;
+        }
+
+        @keyframes fondoAnimado {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--azul-marino) 0%, var(--azul-marino-oscuro) 60%, var(--naranja-oscuro) 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 6px 25px var(--sombra);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 140, 66, 0.35) 0%, transparent 60%);
+            animation: brilloHeader 6s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes brilloHeader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        header h1 {
+            color: var(--blanco);
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--naranja), 0 0 30px var(--naranja-claro);
+            animation: tituloPulso 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes tituloPulso {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        /* ===== NAV ===== */
+        .barrasuper {
+            background: linear-gradient(90deg, var(--azul-marino-oscuro), var(--azul-marino), var(--naranja-oscuro));
+            box-shadow: 0 4px 15px var(--sombra);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .barrasuper ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .barrasuper li { margin: 0; }
+
+        .barrasuper a {
+            display: block;
+            color: var(--blanco);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .barrasuper a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--naranja);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        .barrasuper a:hover::after,
+        .barrasuper a.activo::after {
+            width: 80%;
+            box-shadow: 0 0 12px var(--naranja);
+        }
+
+        .barrasuper a:hover {
+            background: rgba(255, 140, 66, 0.2);
+            text-shadow: 0 0 10px var(--naranja);
+        }
+
+        .barrasuper a.activo {
+            background: rgba(255, 140, 66, 0.25);
+            color: var(--naranja-claro);
+            text-shadow: 0 0 12px var(--naranja);
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .contenedor-principal {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* ===== CARRUSEL ===== */
+        .bloque-carrusel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px var(--sombra);
+            border: 2px solid var(--naranja);
+            animation: aparecer 0.8s ease both;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .carruconte {
+            position: relative;
+            min-height: 400px;
+        }
+
+        /* ===== TARJETAS DEL CARRUSEL (MEJORADAS) ===== */
+        .tarjecarru {
+            display: none;
+            gap: 2.5rem;
+            align-items: stretch;
+            flex-wrap: wrap;
+            animation: deslizarEntrada 0.7s ease both;
+        }
+
+        .tarjecarru.activo {
+            display: flex;
+        }
+
+        @keyframes deslizarEntrada {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .imagenper {
+            width: 300px;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid var(--naranja);
+            box-shadow: 0 15px 35px var(--sombra);
+            transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .imagenper:hover {
+            transform: scale(1.04) rotate(-1.5deg);
+            box-shadow: 0 0 40px var(--azul-marino);
+            border-color: var(--azul-marino);
+        }
+
+        .infoper {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(160deg, var(--blanco) 0%, #fff5ec 100%);
+            padding: 2rem 2rem 1.8rem;
+            border-radius: 20px;
+            border-left: 8px solid var(--azul-marino);
+            box-shadow: 0 10px 30px var(--sombra);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .infoper::before {
+            content: "";
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 60px;
+            height: 6px;
+            background: linear-gradient(90deg, var(--naranja), var(--naranja-oscuro));
+            border-radius: 6px;
+        }
+
+        .infoper h3 {
+            color: var(--azul-marino);
+            font-size: 2rem;
+            margin: 0 0 0.3rem;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0 var(--naranja-claro);
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .infoper h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--naranja), transparent);
+            border-radius: 4px;
+        }
+
+        .datoper {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem 1rem;
+        }
+
+        .datoper li {
+            padding: 0.55rem 0.9rem;
+            background: linear-gradient(135deg, rgba(255, 140, 66, 0.12), rgba(27, 42, 78, 0.06));
+            border-left: 4px solid var(--naranja);
+            border-radius: 10px;
+            font-size: 0.92rem;
+            line-height: 1.35;
+            transition: all 0.3s ease;
+        }
+
+        .datoper li:hover {
+            background: linear-gradient(135deg, rgba(255, 140, 66, 0.22), rgba(27, 42, 78, 0.12));
+            transform: translateX(4px);
+            border-left-color: var(--azul-marino);
+        }
+
+        .datoper strong {
+            color: var(--azul-marino);
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.15rem;
+            opacity: 0.85;
+        }
+
+        .infoper p {
+            line-height: 1.7;
+            color: var(--texto);
+            border-top: 2px dashed var(--naranja);
+            padding-top: 1.2rem;
+            margin: 0;
+            font-size: 1rem;
+            text-align: justify;
+            position: relative;
+        }
+
+        .infoper p::first-letter {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--naranja-oscuro);
+            float: left;
+            line-height: 1;
+            margin: 4px 8px 0 0;
+            font-family: Georgia, serif;
+        }
+
+        /* ===== CONTROLES CARRUSEL ===== */
+        .carrucontro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .flecha-carrusel {
+            background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
+            color: var(--blanco);
+            border: 3px solid var(--naranja);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 6px 18px var(--sombra);
+            transition: all 0.4s ease;
+        }
+
+        .flecha-carrusel:hover {
+            transform: scale(1.15) rotate(10deg);
+            background: linear-gradient(135deg, var(--naranja), var(--naranja-oscuro));
+            box-shadow: 0 0 25px var(--naranja);
+        }
+
+        .flecha-carrusel:active {
+            transform: scale(0.95);
+        }
+
+        #carrusindi {
+            font-weight: bold;
+            color: var(--azul-marino);
+            font-size: 1.2rem;
+            padding: 0.5rem 1.2rem;
+            background: var(--naranja-claro);
+            border-radius: 20px;
+            border: 2px solid var(--naranja);
+            animation: tituloPulso 3s ease-in-out infinite;
+        }
+
+        /* ===== FORMULARIO ===== */
+        .form-container {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px var(--sombra);
+            border: 2px solid var(--azul-marino-claro);
+            animation: aparecer 0.8s ease both;
+        }
+
+        .form-container h2 {
+            color: var(--azul-marino);
+            text-align: center;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 0 var(--naranja);
+            border-bottom: 4px solid var(--naranja);
+            padding-bottom: 0.8rem;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--azul-marino);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid var(--naranja);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--blanco);
+            color: var(--texto);
+            transition: all 0.35s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--azul-marino);
+            box-shadow: 0 0 15px var(--azul-marino-claro);
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
+            color: var(--blanco);
+            border: 3px solid var(--naranja);
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px var(--sombra);
+            transition: all 0.4s ease;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: linear-gradient(135deg, var(--naranja), var(--naranja-oscuro));
+            box-shadow: 0 12px 30px var(--naranja-oscuro);
+            text-shadow: 0 0 12px var(--naranja-claro);
+        }
+
+        .error-msg {
+            color: #d63384;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .oculto { display: none; }
+
+        #mensaje-confirmacion {
+            background: linear-gradient(135deg, var(--naranja), var(--naranja-oscuro));
+            color: var(--blanco);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border: 2px solid var(--azul-marino);
+            animation: deslizarEntrada 0.6s ease both;
+        }
+
+        /* ===== SECCIÓN SECUNDARIOS ===== */
+        .seccionsecu {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--sombra);
+            border: 2px solid var(--naranja);
+            animation: aparecer 0.8s ease both;
+        }
+
+        .seccionsecu h2 {
+            text-align: center;
+            color: var(--azul-marino);
+            font-size: 2.2rem;
+            margin-top: 0;
+            text-shadow: 1px 1px 0 var(--naranja), 0 0 20px var(--naranja-claro);
+            animation: tituloPulso 3s ease-in-out infinite;
+        }
+
+        .subtisecu {
+            text-align: center;
+            color: var(--naranja-oscuro);
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .rejisecu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* ===== TARJETAS SECUNDARIOS CON OVERLAY AL HOVER ===== */
+        .tarjesecu {
+            background: linear-gradient(160deg, var(--blanco), var(--naranja-claro));
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px var(--sombra);
+            border: 3px solid var(--naranja);
+            transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+            animation: aparecer 0.6s ease both;
+        }
+
+        .tarjesecu:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px var(--azul-marino);
+            border-color: var(--azul-marino);
+        }
+
+        /* Contenedor de la imagen */
+        .conteimgsecu {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 260px;
+            border-radius: 13px;
+        }
+
+        .conteimgsecu img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s ease, filter 0.7s ease;
+        }
+
+        .tarjesecu:hover .conteimgsecu img {
+            transform: scale(1.15);
+            filter: brightness(0.4) blur(2px);
+        }
+
+        /* Overlay de información: aparece encima de la imagen al hacer hover */
+        .infosecu {
+            position: absolute;
+            inset: 0;
+            padding: 1.2rem;
+            background: linear-gradient(to top, rgba(13, 24, 48, 0.95) 0%, rgba(27, 42, 78, 0.85) 60%, rgba(255, 140, 66, 0.35) 100%);
+            color: var(--blanco);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+            text-align: left;
+        }
+
+        .tarjesecu:hover .infosecu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .infosecu h3 {
+            margin: 0 0 0.5rem;
+            color: var(--naranja);
+            font-size: 1.15rem;
+            text-shadow: 0 0 10px var(--naranja-oscuro);
+            border-bottom: 2px solid var(--naranja);
+            padding-bottom: 0.4rem;
+            animation: deslizarEntrada 0.5s ease both;
+        }
+
+        .infosecu p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--blanco);
+            animation: deslizarEntrada 0.6s ease both;
+        }
+
+        /* Tarjeta de error especial */
+        .tarjeta-error {
+            border-color: #ff0040 !important;
+            animation: glitchError 2s ease-in-out infinite;
+        }
+
+        .tarjeta-error .conteimgsecu img {
+            filter: grayscale(1) contrast(1.4) hue-rotate(300deg);
+        }
+
+        .tarjeta-error .infosecu {
+            background: linear-gradient(to top, #1a0000, #4a0020) !important;
+        }
+
+        .msg-error-sistema {
+            color: #ff0040 !important;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff0040;
+            animation: parpadeo 1s steps(2) infinite;
+        }
+
+        @keyframes glitchError {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(2px, -2px); }
+            75% { transform: translate(-1px, -1px); }
+        }
+
+        @keyframes parpadeo {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .barrasuper a { padding: 0.8rem 1rem; font-size: 0.9rem; }
+            .tarjecarru.activo {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .imagenper {
+                width: 100%;
+                max-width: 320px;
+                height: auto;
+                margin: 0 auto;
+            }
+            .infoper { padding: 1.5rem; }
+            .infoper h3 { font-size: 1.5rem; }
+            .datoper { grid-template-columns: 1fr; }
+            .infoper p::first-letter { font-size: 1.8rem; }
+            .seccionsecu h2 { font-size: 1.6rem; }
+            .rejisecu { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+            .conteimgsecu { height: 220px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Personajes</h1>
+    </header>
+    <nav class="barrasuper">
+        <ul>
+            <li><a href="index.html">Premisa</a></li>
+            <li><a href="personajesc.html" class="activo">Personajes</a></li>
+            <li><a href="habilidadesb.html">Habilidades</a></li>
+            <li><a href="lugares.html">Lugares</a></li>
+            <li><a href="contactob.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <main class="contenedor-principal">
+        <section class="bloque-carrusel">
+            <div class="carruconte">
+                <div class="tarjecarru activo">
+                    <img src="imgpj/dino.jpg" alt="Dino Delaney" class="imagenper">
+                    <div class="infoper">
+                        <h3>Dino «Zelarayan»</h3>
+                        <ul class="datoper">
+                            <li><strong>Altura:</strong> 1.70m</li>
+                            <li><strong>Piel:</strong> Trigueña</li>
+                            <li><strong>Complexión:</strong> Delgada (Fuerza notable en los brazos por arquería)</li>
+                            <li><strong>Cabello:</strong> Negro, medianamente largo y alborotado</li>
+                            <li><strong>Ojos:</strong> Heterocromía (Derecho azul, izquierdo rojo)</li>
+                        </ul>
+                        <p>Tras ser rechazado por su familia debido a un accidente que no provocó, fue adoptado por una familia acogedora y se mudó de su país natal. Camina por la vida, en busca de perdonarse a sí mismo y romper las cadenas del pasado que aún arrastra.</p>
+                    </div>
+                </div>
+                <div class="tarjecarru">
+                    <img src="imgpj/beck.jpg" alt="Beck Rodrig" class="imagenper">
+                    <div class="infoper">
+                        <h3>Beck «Rodrig»</h3>
+                        <ul class="datoper">
+                            <li><strong>Altura:</strong> 1.90m</li>
+                            <li><strong>Piel:</strong> Blanca (tez pálida)</li>
+                            <li><strong>Complexión:</strong> Delgada</li>
+                            <li><strong>Cabello:</strong> Blanco con puntas negras (suelto o en cola de caballo)</li>
+                            <li><strong>Ojos:</strong> Blancos (Ceguera)</li>
+                        </ul>
+                        <p>Luego de haber perdido gran parte de la visión en un accidente, vive a tientas en un mundo que no le importa ni emociona. Aunque todo cambia cuando una sombra del pasado regresa para saldar viejas deudas firmadas en sangre.</p>
+                    </div>
+                </div>
+                <div class="tarjecarru">
+                    <img src="imgpj/meilas.jpg" alt="Meilas Chernabog" class="imagenper">
+                    <div class="infoper">
+                        <h3>«Meilas Chernabog»</h3>
+                        <ul class="datoper">
+                            <li><strong>Altura:</strong> 1.98m</li>
+                            <li><strong>Piel:</strong> Blanca</li>
+                            <li><strong>Complexión:</strong> Atlética</li>
+                            <li><strong>Cabello:</strong> Negro azabache, largo lacio, en media cola</li>
+                            <li><strong>Ojos:</strong> Verde pino</li>
+                        </ul>
+                        <p>Sin hogar, sin pasado, sin recuerdos. Un huérfano sin nombre que no sabe quién es, si la sombra que escapó esa noche o el perro lazado a una correa por voluntad propia. Vive guiado solo por el deseo de proteger al pilar de su cordura y a la única estrella que brilla en la oscuridad de sus pensamientos.</p>
+                    </div>
+                </div>
+                <div class="tarjecarru">
+                    <img src="imgpj/emily.jpg" alt="Emily Harrison" class="imagenper">
+                    <div class="infoper">
+                        <h3>Emily Harrison</h3>
+                        <ul class="datoper">
+                            <li><strong>Altura:</strong> 1.70m</li>
+                            <li><strong>Piel:</strong> Blanca (tez pálida)</li>
+                            <li><strong>Complexión:</strong> Delgada, atlética</li>
+                            <li><strong>Cabello:</strong> Castaño claro, ondulado, largo (suelto o en coleta)</li>
+                            <li><strong>Ojos:</strong> Por definir</li>
+                        </ul>
+                        <p>Tras vivir toda su infancia y adolescencia como una "Discapacitada", su tardío despertar la llevó a replantearse todo lo que creía que ella era. Ahora, tiene que acostumbrarse a la "normalidad" y aceptar este "milagro" que no deseaba.</p>
+                    </div>
+                </div>
+                <div class="tarjecarru">
+                    <img src="imgpj/azyar.jpg" alt="Oliver 'Azyar' Hubatch" class="imagenper">
+                    <div class="infoper">
+                        <h3>Oliver "Azyar" Hubatch</h3>
+                        <ul class="datoper">
+                            <li><strong>Altura:</strong> 1.65m</li>
+                            <li><strong>Piel:</strong> Trigueña (leve bronceado)</li>
+                            <li><strong>Complexión:</strong> Delgada atlética (deportista)</li>
+                            <li><strong>Cabello:</strong> Castaño oscuro, largo, lacio, en media cola</li>
+                            <li><strong>Ojos:</strong> Por definir</li>
+                        </ul>
+                        <p>Guiado por el legado de su apellido e inspirado por su abuelo, se enlistó al ejército como espía contra el vigilantismo. Sin embargo, la frágil grieta entre el deber y la rebeldía se hace enorme cuando una variable inesperada sacude su mundo guiado por protocolos monótonos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carrucontro">
+                <button type="button" id="btn-prev" class="flecha-carrusel">◀</button>
+                <span id="carrusindi">1 / 5</span>
+                <button type="button" id="btn-next" class="flecha-carrusel">▶</button>
+            </div>
+        </section>
+        <div class="form-container">
+            <h2>Enviar comentario</h2>
+            <div id="mensaje-confirmacion" class="oculto"></div>
+            
+            <form id="formulario-registro" action="#" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="nombre">Nombre/Nickname:</label>
+                    <input type="text" id="nombre" name="nombre" required minlength="3" placeholder="Inserte Nickname chévere">
+                    <span class="error-msg" id="error-nombre"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" required placeholder="correo@example.com">
+                    <span class="error-msg" id="error-correo"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="comentario">Comentarios (Mínimo 10 caracteres):</label>
+                    <textarea id="comentario" name="comentario" required minlength="10" rows="4" placeholder="Escribe aquí tu opinión..."></textarea>
+                    <span class="error-msg" id="error-comentario"></span>
+                </div>
+                <button type="submit">Enviar Comentario</button>
+            </form>
+        </div>
+    </main>
+    <section class="seccionsecu">
+        <h2>Personajes secundarios</h2>
+        <p class="subtisecu">Otros rostros que forman parte de la historia de Hidden Echoes.</p>
+        <div class="rejisecu"> 
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/claire.jpg" alt="Claire Mori">
+                    <div class="infosecu">
+                        <h3>Claire Mori</h3>
+                        <p>Pareja romántica. Una joven de carácter intenso e impulsivo, ferozmente protectora con quienes ama.</p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/dayanne.jpg" alt="Dayane Rivers">
+                    <div class="infosecu">
+                        <h3>Dayane Rivers</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu tarjeta-error">
+                <div class="conteimgsecu">
+                    <img src="imgpj/Emma.jpg" alt="Emma">
+                    <div class="infosecu">
+                        <p class="msg-error-sistema">CRITICAL ERROR: DATA CORRUPTED</p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/ethel.jpg" alt="Ethel Delaney">
+                    <div class="infosecu">
+                        <h3>Ethel delaney</h3>
+                        <p>//ERROR// = //Info no encontrada//</p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="" alt="Félix Cortner">
+                    <div class="infosecu">
+                        <h3>Félix Cortner</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/ivan.jpg" alt="Ivan Stuart">
+                    <div class="infosecu">
+                        <h3>Ivan Stuart</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/jhon.jpg" alt="John Crawford">
+                    <div class="infosecu">
+                        <h3>John Crawford</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/night.jpg" alt="Night Archibald">
+                    <div class="infosecu">
+                        <h3>Night Archibald</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/nitsa.jpg" alt="Nitsa Santana">
+                    <div class="infosecu">
+                        <h3>Nitsa Santana</h3>
+                        <p>Interés romántico. Una chica tímida que le gusta el arte</p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="" alt="Rilian Brooks">
+                    <div class="infosecu">
+                        <h3>Rilian Brooks</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/sigfried.jpg" alt="Sigfrid Zeleyaran">
+                    <div class="infosecu">
+                        <h3>Sigfrid Zeleyaran</h3>
+                        <p>Hermana de Dino. Su cómplice en todo, así como la voz de la razón.</p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="imgpj/sophia.jpg" alt="Sophia Ferros">
+                    <div class="infosecu">
+                        <h3>Sophia Ferros</h3>
+                        <p>Pareja romántica. Una joven tranquila, reservada, conocida por su paciencia y sentido de justicia.</p>
+                    </div>
+                </div>
+            </article>
+            <!--
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="" alt="Tom Andrew">
+                    <div class="infosecu">
+                        <h3>Tom Andrew</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="" alt="Velvett Rivers">
+                    <div class="infosecu">
+                        <h3>Velvett Rivers</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="" alt="Washington Brooks">
+                    <div class="infosecu">
+                        <h3>Washington Brooks</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            <article class="tarjesecu">
+                <div class="conteimgsecu">
+                    <img src="" alt="William Faurus">
+                    <div class="infosecu">
+                        <h3>William Faurus</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </article>
+            -->
+        </div>
+    </section>
+    <script src="1pagina.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tarjetas = document.querySelectorAll('.tarjecarru');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            const indicador = document.getElementById('carrusindi');
+            let actual = 0;
+
+            function mostrar(indice) {
+                tarjetas.forEach((t, i) => {
+                    t.classList.toggle('activo', i === indice);
+                    if (i === indice) {
+                        t.style.animation = 'none';
+                        void t.offsetWidth;
+                        t.style.animation = '';
+                    }
+                });
+                if (indicador) {
+                    indicador.textContent = (indice + 1) + ' / ' + tarjetas.length;
+                }
+            }
+
+            if (btnNext) {
+                btnNext.addEventListener('click', () => {
+                    actual = (actual + 1) % tarjetas.length;
+                    mostrar(actual);
+                });
+            }
+
+            if (btnPrev) {
+                btnPrev.addEventListener('click', () => {
+                    actual = (actual - 1 + tarjetas.length) % tarjetas.length;
+                    mostrar(actual);
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    actual = (actual + 1) % tarjetas.length;
+                    mostrar(actual);
+                } else if (e.key === 'ArrowLeft') {
+                    actual = (actual - 1 + tarjetas.length) % tarjetas.length;
+                    mostrar(actual);
+                }
+            });
+
+            mostrar(0);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premisa - Hidden Echoes</title>
+    <link rel="stylesheet" href="1pagina.css">
+</head>
+<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#ffffff; min-height:100vh; background-color:#000000; background-image: radial-gradient(2px 2px at 20px 30px, #ffffff, transparent), radial-gradient(2px 2px at 40px 70px, #ffffff, transparent), radial-gradient(1px 1px at 90px 40px, #ffffff, transparent), radial-gradient(1px 1px at 130px 80px, #ffffff, transparent), radial-gradient(2px 2px at 160px 120px, #ffffff, transparent), radial-gradient(1px 1px at 200px 30px, #ffffff, transparent), radial-gradient(2px 2px at 240px 160px, #ffffff, transparent), radial-gradient(1px 1px at 280px 90px, #ffffff, transparent), radial-gradient(2px 2px at 320px 200px, #ffffff, transparent), radial-gradient(1px 1px at 360px 50px, #ffffff, transparent), radial-gradient(2px 2px at 400px 140px, #ffffff, transparent), radial-gradient(1px 1px at 440px 220px, #ffffff, transparent), radial-gradient(2px 2px at 480px 100px, #ffffff, transparent), radial-gradient(1px 1px at 520px 180px, #ffffff, transparent), radial-gradient(2px 2px at 560px 60px, #ffffff, transparent); background-size: 600px 300px; background-attachment: fixed; animation: estrellas 60s linear infinite;">
+
+    <header style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 60%, #333333 100%); padding:2.5rem 1rem; text-align:center; box-shadow:0 6px 25px rgba(255,255,255,0.15); border-bottom:2px solid #ffffff; position:relative; overflow:hidden;">
+        <h1 style="color:#ffffff; margin:0; font-size:2.8rem; letter-spacing:5px; text-shadow:0 0 15px #ffffff, 0 0 30px #cccccc, 0 0 45px #999999;">Hidden Echoes</h1>
+    </header>
+
+    <nav class="barrasuper" style="background: linear-gradient(90deg, #000000, #1a1a1a, #000000); box-shadow:0 4px 15px rgba(255,255,255,0.15); position:sticky; top:0; z-index:100; border-bottom:1px solid #ffffff;">
+        <ul style="list-style:none; margin:0; padding:0; display:flex; justify-content:center; flex-wrap:wrap;">
+            <li><a href="index.html" class="activo" style="display:block; background:rgba(255,255,255,0.15); color:#ffffff; text-decoration:none; padding:1rem 1.5rem; font-weight:600; letter-spacing:2px; text-shadow:0 0 12px #ffffff; border-bottom:3px solid #ffffff;">Premisa</a></li>
+            <li><a href="personajesc.html" style="display:block; color:#ffffff; text-decoration:none; padding:1rem 1.5rem; font-weight:600; letter-spacing:2px;">Personajes</a></li>
+            <li><a href="habilidadesb.html" style="display:block; color:#ffffff; text-decoration:none; padding:1rem 1.5rem; font-weight:600; letter-spacing:2px;">Habilidades</a></li>
+            <li><a href="lugares.html" style="display:block; color:#ffffff; text-decoration:none; padding:1rem 1.5rem; font-weight:600; letter-spacing:2px;">Lugares</a></li>
+            <li><a href="contactob.html" style="display:block; color:#ffffff; text-decoration:none; padding:1rem 1.5rem; font-weight:600; letter-spacing:2px;">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenedor general de la página -->
+    <main class="conteprinci-vertical" style="max-width:1200px; margin:2rem auto; padding:0 1rem;">
+
+        <!-- Bloque de la Foto Resumen -->
+        <div class="contemicrofoto" style="background:rgba(255,255,255,0.05); backdrop-filter:blur(8px); border-radius:20px; padding:1.5rem; margin-bottom:2rem; box-shadow:0 10px 30px rgba(255,255,255,0.15); border:2px solid #ffffff; text-align:center;">
+            <img src="imgpm/premisa.jpg" alt="Representación arqueológica de las primeras habilidades" class="imgpremi" style="max-width:100%; height:auto; border-radius:16px; border:4px solid #ffffff; box-shadow:0 0 30px rgba(255,255,255,0.5);">
+        </div>
+
+        <!-- Contenedor exclusivo para enviar el formulario a la esquina inferior derecha -->
+        <div class="alineacion-formulario" style="display:flex; justify-content:flex-end;">
+            <div class="form-container" style="width:100%; max-width:500px; background:rgba(255,255,255,0.05); backdrop-filter:blur(8px); border-radius:20px; padding:2rem; box-shadow:0 10px 30px rgba(255,255,255,0.15); border:2px solid #ffffff;">
+                <h2 style="color:#ffffff; text-align:center; font-size:1.8rem; text-shadow:0 0 15px #ffffff; border-bottom:3px solid #ffffff; padding-bottom:0.8rem; margin-top:0; letter-spacing:2px;">Enviar comentario</h2>
+                <div id="mensaje-confirmacion" class="oculto"></div>
+                
+                <form id="formulario-registro" action="#" method="POST" novalidate>
+                    <div class="form-group" style="margin-bottom:1.3rem;">
+                        <label for="nombre" style="display:block; margin-bottom:0.5rem; color:#ffffff; font-weight:600; letter-spacing:1px;">Nombre Completo:</label>
+                        <input type="text" id="nombre" name="nombre" required minlength="3" placeholder="Inserte Nickname chévere" style="width:100%; padding:0.85rem 1rem; border:2px solid #ffffff; border-radius:12px; font-family:inherit; font-size:1rem; background:rgba(0,0,0,0.6); color:#ffffff; box-sizing:border-box; outline:none;">
+                        <span class="error-msg" id="error-nombre" style="color:#ff6b6b; font-size:0.9rem; margin-top:0.3rem; display:block; font-weight:600;"></span>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom:1.3rem;">
+                        <label for="correo" style="display:block; margin-bottom:0.5rem; color:#ffffff; font-weight:600; letter-spacing:1px;">Correo Electrónico:</label>
+                        <input type="email" id="correo" name="correo" required placeholder="correo@example.com" style="width:100%; padding:0.85rem 1rem; border:2px solid #ffffff; border-radius:12px; font-family:inherit; font-size:1rem; background:rgba(0,0,0,0.6); color:#ffffff; box-sizing:border-box; outline:none;">
+                        <span class="error-msg" id="error-correo" style="color:#ff6b6b; font-size:0.9rem; margin-top:0.3rem; display:block; font-weight:600;"></span>
+                    </div>    
+                    
+                    <div class="form-group" style="margin-bottom:1.3rem;">
+                        <label for="comentario" style="display:block; margin-bottom:0.5rem; color:#ffffff; font-weight:600; letter-spacing:1px;">Comentarios (Mínimo 10 caracteres):</label>
+                        <textarea id="comentario" name="comentario" required minlength="10" rows="4" placeholder="Escribe aquí tu opinión..." style="width:100%; padding:0.85rem 1rem; border:2px solid #ffffff; border-radius:12px; font-family:inherit; font-size:1rem; background:rgba(0,0,0,0.6); color:#ffffff; box-sizing:border-box; outline:none; resize:vertical; min-height:100px;"></textarea>
+                        <span class="error-msg" id="error-comentario" style="color:#ff6b6b; font-size:0.9rem; margin-top:0.3rem; display:block; font-weight:600;"></span>
+                    </div>
+                    
+                    <button type="submit" style="display:block; width:100%; padding:1rem; background:linear-gradient(135deg, #ffffff, #cccccc); color:#000000; border:3px solid #ffffff; border-radius:14px; font-size:1.15rem; font-weight:bold; letter-spacing:2px; cursor:pointer; box-shadow:0 6px 20px rgba(255,255,255,0.4); text-transform:uppercase;">Enviar Comentario</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Animación de fondo estelar -->
+    <style>
+        @keyframes estrellas {
+            0% { background-position: 0 0; }
+            100% { background-position: 600px 300px; }
+        }
+        .barrasuper a:hover {
+            background: rgba(255,255,255,0.1);
+            text-shadow: 0 0 15px #ffffff;
+            transition: all 0.4s ease;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.7);
+            background: rgba(0,0,0,0.8);
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #cccccc, #ffffff);
+            box-shadow: 0 12px 30px rgba(255,255,255,0.7);
+            transform: translateY(-3px);
+        }
+        .imgpremi:hover {
+            box-shadow: 0 0 50px rgba(255,255,255,0.9);
+            transform: scale(1.01);
+            transition: all 0.5s ease;
+        }
+    </style>
+
+    <script src="1pagina.js"></script>
+</body>
+</html>
